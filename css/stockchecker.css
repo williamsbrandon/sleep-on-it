@@ -1,0 +1,342 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+  ========================================
+  Custom Styles
+  ========================================
+*/
+
+
+a {
+  color: #af4f4f;
+}
+
+a:hover {
+  color: #e09898;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+body {
+  min-height: 100vh;
+}
+
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 50%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  height: 1px;
+}
+
+h1 {
+  font-size: 70px;
+  line-height:106px;
+}
+
+h2 {
+  font-size: 26px;
+  line-height: 40px;
+}
+
+h1, h2 {
+  text-transform: uppercase;
+}
+
+p {
+  margin-bottom: 22px;
+  padding-left: 8%;
+  padding-right: 8%;
+  word-wrap: break-word;
+}
+
+small {
+  font-size: 70%;
+}
+
+ul {
+  list-style: none;
+}
+
+strong {
+  font-weight: 400;
+}
+cite, em {
+  font-style: italic;
+}
+
+/*
+  ========================================
+  Home
+  ========================================
+*/
+
+.stock-index {
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  font: 300 16px/24px "Raleway", Helvetica, Arial, sans-serif;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.container {
+  margin: 0;
+  padding: 22px 0;
+  max-width: 65em;
+}
+
+/*
+  ========================================
+  Hero Section
+  ========================================
+*/
+
+.hero {
+  background-color: #006838;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.hero h1 {
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-family: "Oswald", Helvetica, Arial, sans-serif;
+}
+.hero h2 {
+  color: #fff;
+  line-height: 30px;
+}
+
+/*
+  ========================================
+  Navigation
+  ========================================
+*/
+
+.primary-header {
+  align-items: baseline;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.primary-header h2 {
+  color: #fff;
+  padding-left: 10px;
+}
+
+.primary-header a {
+  color: #fff;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.primary-header a:hover {
+  color: #bbbbbb;
+}
+
+.primary-nav ul {
+  display: flex;
+}
+
+.primary-nav li {
+  flex: 1;
+  padding: 10px;
+  text-transform: uppercase
+}
+
+
+/*
+  ========================================
+  Footer
+  ========================================
+*/
+
+.footer {
+  align-self: flex-end;
+  background: #414042;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer li {
+  padding: 20px 10px;
+}
+
+.footer small {
+  padding: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/*
+  ========================================
+  Form
+  ========================================
+*/
+
+.flex-form > * {
+  border:0;
+  padding:10px;
+  background:white;
+  line-height:28px;
+  font-size: 18px;
+  border-radius:0;
+  outline:0;
+  border-right:1px solid rgba(0,0,0,0.2);
+  -webkit-appearance:none;
+}
+
+.flex-form {
+  display:flex;
+  max-width: 50em;
+  width: 90%;
+  margin: 20px;
+}
+
+input[type="search"] {
+  flex-grow:1;
+}
+
+/*
+  ========================================
+  Product Data
+  ========================================
+*/
+
+.product-info {
+  width: 260px;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+  table-layout: fixed;
+  width: 100%;
+}
+thead, td {
+  padding: 5px;
+  text-align: left;
+}
+thead {
+  border-bottom: 2px solid grey;
+  padding-bottom: 10px;
+}
+tfoot {
+  border-top: 2px solid grey;
+  padding-top: 10px;
+}
+tr:nth-child(even) {
+  background-color: #eee;
+}
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+/*tr {
+  color: #555;
+}
+tr:hover {
+  background: #f4f4f4;
+}
+td:hover {
+  color: #555;
+}
+th, td {
+  color: #999;
+  border: 1px solid #eee;
+  padding: 12px 35px;
+  border-collapse: collapse;
+}
+
+th {
+  background: #00cccc;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+th:last-child {
+  border-right: none;
+}*/
