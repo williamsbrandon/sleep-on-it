@@ -21,27 +21,43 @@ const regions = {
   }
 };
 
-function displaySizes(variants) {
-
-  // clear table and recreate tBody
-  while (sizeTable.rows[1]) {
-    sizeTable.deleteRow(1);
+const options = {
+  chartArea: {
+    backgroundColor: '#FFFF9D'
+  },
+  legend: { display: false },
+  scales: {
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Stock'
+      }
+    }]
   }
-  const body = sizeTable.createTBody();
+}
 
-  // create a new row for each item variant
+function createChart(variants) {
+  let sizes = [];
+  let stock = [];
   variants.forEach(element => {
-    const size = element.attributes.size.replace(/,/g, '.');
-    const avail = element.ATS;
-    const row = `
-    <tr>
-      <td>${size}</td>
-      <td>${avail}</td>
-    </tr>
-    `;
-    body.innerHTML += row;
+    sizes.push(element.attributes.size.replace(/,/g, '.'));
+    stock.push(element.ATS);
+  });
+
+  let chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: sizes, // sizes array
+      datasets: [{
+        label: 'Stock', // "Sizes"
+        data: stock, //ATS array
+        backgroundColor: '#FF6138'
+      }]
+    },
+    options
   });
 }
+
 
 // request the item variant data
 function getStock() {
@@ -61,14 +77,17 @@ function getStock() {
       // parse item variant data
       response.json().then(data => {
         variants.push(...data.variations.variants);
-        displaySizes(variants);
+        // displaySizes(variants);
+        const sizes = createChart(variants);
       });
     })
     .catch(err => console.log('Fetch error:-S',err));
 }
 
-const sizeTable = document.getElementById('size-table');
+// const sizeTable = document.getElementById('size-table');
+const ctx = document.querySelector('canvas').getContext('2d');
 const searchInput = document.getElementById('sku-input');
 const searchButton = document.getElementById('sku-button');
 
 searchButton.addEventListener('click', getStock);
+
