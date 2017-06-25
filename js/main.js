@@ -46,12 +46,31 @@ const options = {
 }
 
 function createChart(variants) {
-  let sizes = [];
-  let stock = [];
+  const sizes = [];
+  const stock = [];
+  const colors = [];
   variants.forEach(element => {
     sizes.push(element.attributes.size.replace(/,/g, '.'));
-    stock.push(element.ATS);
+
+    const ats = parseInt(element.ATS);
+    console.log(ats);
+    switch (true) {
+      case (ats <= 1):
+        colors.push('#FF6138');
+        break;
+      case (ats <= 3):
+        colors.push('#FFFF9D');
+        break;
+      case (ats <= 5):
+        colors.push('#BEEB9F');
+        break;
+      default:
+        colors.push('#79BD8F');
+        break;
+    }
+    stock.push(ats);
   });
+  console.log(colors);
 
   let chart = new Chart(ctx, {
     type: 'bar',
@@ -60,11 +79,13 @@ function createChart(variants) {
       datasets: [{
         label: 'Stock', // "Sizes"
         data: stock, //ATS array
-        backgroundColor: '#FF6138'
+        backgroundColor: colors
       }]
     },
     options
   });
+
+  document.body.style.height = '100vh';
 }
 
 
@@ -75,7 +96,6 @@ function getStock() {
 
   // updateButton doesn't change skuCurrent
   if (this.id === 'generate-button') {
-    console.log(this.id)
     skuCurrent = skuInput.value;
   }
 
