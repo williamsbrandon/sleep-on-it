@@ -108,6 +108,10 @@ cite, em {
   font-style: italic;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /*
   ========================================
   Home
@@ -115,7 +119,6 @@ cite, em {
 */
 
 .container {
-  display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
@@ -159,10 +162,6 @@ cite, em {
   .container {
     width: 100%;
   }
-}
-
-.graph {
-  flex: 1;
 }
 
 /*
@@ -221,7 +220,29 @@ input[type='search'] {
   top: 50%;
   margin-top: -.5em;
 }
+/*
+  ========================================
+  Graph and Options
+  ========================================
+*/
 
+.graph-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.snapshot {
+  align-self: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  width: 50rem;
+}
+
+#update {
+  width: 5rem;
+}
 /*
   ========================================
   Footer

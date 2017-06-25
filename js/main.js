@@ -7,17 +7,20 @@ const regions = {
     // mediaUrl = "",
     "variantsUrl" : "https://www.adidas.com/on/demandware.store/Sites-adidas-US-Site/en_US/Product-GetVariants"
   },
-  "EUUK" : {
+  "EUUK": {
     // mediaUrl = "",
     "variantsUrl" : "https://www.adidas.nl/on/demandware.store/Sites-adidas-GB-Site/nl_NL/Product-GetVariants"
   },
-  "EUEU" : {
+  "EUEU": {
     // mediaUrl = "",
     "variantsUrl" : "https://www.adidas.nl/on/demandware.store/Sites-adidas-GB-Site/nl_NL/Product-GetVariants"
   },
-  "EUUK" : {
+  "EUUK": {
     // mediaUrl = "",
     "variantsUrl" : "https://www.adidas.nl/on/demandware.store/Sites-adidas-DE-Site/de_DE/Product-GetVariants"
+  },
+  'Australia': {
+    'variantsUrl': 'http://www.adidas.com.au/on/demandware.store/Sites-adidas-AU-Site/en_AU/Product-GetVariants'
   }
 };
 
@@ -27,10 +30,16 @@ const options = {
   },
   legend: { display: false },
   scales: {
+    xAxes: [{
+      categoryPercentage: 1.0,
+      ticks: {
+        fontSize: 11
+      }
+    }],
     yAxes: [{
-      scaleLabel: {
-        display: true,
-        labelString: 'Stock'
+      ticks: {
+        beginAtZero: true,
+        stepSize: 1
       }
     }]
   }
@@ -63,10 +72,14 @@ function createChart(variants) {
 function getStock() {
   const country = document.getElementById('region').value;
   const url = regions[country].variantsUrl;
-  const sku = searchInput.value;
 
-  const variants = [];
-  fetch(`${url}?pid=${sku}`)
+  // updateButton doesn't change skuCurrent
+  if (this.id === 'generate-button') {
+    console.log(this.id)
+    skuCurrent = skuInput.value;
+  }
+
+  fetch(`${url}?pid=${skuCurrent}`)
     .then(response => {
       // check for errors 
       if (response.status !== 200) {
@@ -75,19 +88,34 @@ function getStock() {
       }
 
       // parse item variant data
-      response.json().then(data => {
-        variants.push(...data.variations.variants);
-        // displaySizes(variants);
-        const sizes = createChart(variants);
-      });
+      response.json().then(data => showStock(data));
     })
     .catch(err => console.log('Fetch error:-S',err));
 }
 
-// const sizeTable = document.getElementById('size-table');
+function showStock(data) {
+  // show canvas and snapshot       
+  document.querySelectorAll('.hidden').forEach(element => element.classList.remove('hidden'));
+  
+  // create graph
+  const variants = [...data.variations.variants];
+  const sizes = createChart(variants);
+
+  // create snapshot description
+  skuDisplay.innerHTML = `Product ID: ${skuCurrent}`;
+  snapShotTime.innerHTML = `Snapshot: ${new Date().toLocaleTimeString()}`;
+}
+
+
+// global and mutable for update button functionality
+let skuCurrent = '';
+
+const skuInput = document.querySelector('#sku-input');
+const snapShotTime = document.querySelector('#time');
+const skuDisplay = document.querySelector('#sku-display');
 const ctx = document.querySelector('canvas').getContext('2d');
-const searchInput = document.getElementById('sku-input');
-const searchButton = document.getElementById('sku-button');
+const searchButton = document.querySelector('#generate-button');
+const updateButton = document.querySelector('#update-button');
 
 searchButton.addEventListener('click', getStock);
-
+updateButton.addEventListener('click', getStock);

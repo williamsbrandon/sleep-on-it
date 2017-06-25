@@ -27,12 +27,17 @@
           <option value="EUEU">EU (EU Sizing)</option>
         </select>
       </span>
-      <button id="sku-button" type="button">Generate</button>
+      <button id="generate-button" type="button">Generate</button>
 
     </form>
   </section>
-  <section class='graph container'>
-    <canvas></canvas>
+  <section class='graph-wrapper container'>
+    <canvas class='hidden'></canvas>
+    <div class='snapshot hidden'>
+      <span id='sku-display'></span>
+      <span id='time'></span>
+      <button id='update-button' type='button'>Update</button>
+    </div>
   </section>
   <!-- Contact Links and Footer -->
   <footer class="footer">
