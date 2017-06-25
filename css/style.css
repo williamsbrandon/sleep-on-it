@@ -64,6 +64,7 @@ a:hover {
 }
 
 body {
+  color: #444;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,7 +128,7 @@ cite, em {
 }
 
 .hero {
-  background-color: #00A388;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -138,14 +139,14 @@ cite, em {
 }
 
 .title {
-  color: #fff;
+  color: #00A388;
   font-size: 4rem;
   line-height: 6rem;
   margin-top: 3rem;
 }
 
 .desc {
-  color: #fff;
+  color: #00A388;
   font-size: 1.5rem;
   margin-bottom: 2.5rem;
 }
@@ -169,57 +170,55 @@ cite, em {
   Form
   ========================================
 */
-
-.flex-form > * {
-  border:0;
-  border-right:1px solid rgba(0,0,0,0.2);
-  background:white;
-  border-radius:0;
-  font-family: "Fira Sans";
-  height: 2.5rem;
-  outline:0;
-  padding-left: 0.5rem;
-  margin-bottom: 1rem;
-  -webkit-appearance:none;
-}
-
 .flex-form {
   display:flex;
   flex-wrap: wrap;
-  justify-content: center;
-  max-width: 30rem;
+  justify-content: space-around;
+  max-width: 35rem;
   width: 80%;
+}
+
+.flex-form > * {
+  /*border:;*/
+  border: 1px solid rgba(0,0,0,0.2);
+  background:white;
+  border-radius: 3px;
+  color: #666;
+  font-family: "Fira Sans";
+  height: 2.5rem;
+  padding-left: 1em;
+  padding-right: 1em;  
+  margin: 0 0.5em 1rem 0.5em;
+  -webkit-appearance:none;
+}
+
+.flex-form > *:last-child {
+  border-right: 1px solid rgba(0,0,0,0.2);
 }
 
 input[type='search'] {
   flex-grow:1;
 }
 
-/* Custom dropdown */
-.select-dropdown {
-  position: relative;
+#region  {
+  /* styling */
   display: inline-block;
-  vertical-align: middle;
+  padding: 0.5em 3.5em 0.5em 1em;
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+  flex-grow: 1;
 }
 
-.select-dropdown select {
-  font-family: "Fira Sans";
-  height: 2.5rem;
-  padding-right: 2.5em;	
-  border: 0;
-  -webkit-appearance: button; /* hide default arrow in chrome OSX */
-}
-
-.select-dropdown::after { /*  Custom dropdown arrow */
-  content: "\25BC";
-  height: 1em;
-  font-size: .625em;
-  line-height: 1;
-  position: absolute;
-  right: 1.2em;
-  top: 50%;
-  margin-top: -.5em;
-}
 /*
   ========================================
   Graph and Options
