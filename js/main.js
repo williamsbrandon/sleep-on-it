@@ -101,21 +101,27 @@ function getStock() {
     .then(response => {
       // check for errors 
       if (response.status !== 200) {
-        console.log(`sku error, status code: ${response.status}`);
+        errorDisplay.classList.remove('hidden');
+        errorDisplay.innerHTML = `SKU Error: ${response.statusText}`;
+        console.log(response.status);
         return;
       }
+      // hide error display if shown
+      errorDisplay.classList.add('hidden');
 
       // parse item variant data
       response.json().then(data => showStock(data));
     })
-    .catch(err => console.log('Fetch error:-S',err));
+    .catch(err => {
+      errorDisplay.classList.remove('hidden');
+      errorDisplay.innerHTML = `Fetch error: ${err.message}`;
+    });
 }
 
 function showStock(data) {
   // show snapshot
-  const hidden = document.querySelector('.hidden');
-  if (hidden) {
-    hidden.classList.remove('hidden');
+  if (snapshot.classList.contains('hidden')) {
+    snapshot.classList.remove('hidden');
   }
   
   // create graph
@@ -124,20 +130,25 @@ function showStock(data) {
 
   // create snapshot description
   skuDisplay.innerHTML = `Product ID: ${skuCurrent}`;
-  snapShotTime.innerHTML = `Snapshot: ${new Date().toLocaleTimeString()}`;
+  snapshotTime.innerHTML = `snapshot: ${new Date().toLocaleTimeString()}`;
 }
 
+// search form
+const skuInput = document.querySelector('#sku-input');
+const searchButton = document.querySelector('#generate-button');
+const errorDisplay = document.querySelector('.error');
 
+// snapshot details
+const snapshot = document.querySelector('.snapshot');
+const snapshotTime = document.querySelector('#time');
+const skuDisplay = document.querySelector('#sku-display');
+const updateButton = document.querySelector('#update-button');
 // global and mutable for update button functionality
 let skuCurrent = '';
 
-const skuInput = document.querySelector('#sku-input');
-const snapShotTime = document.querySelector('#time');
-const skuDisplay = document.querySelector('#sku-display');
-const canvas = document.querySelector('canvas')
-const ctx = canvas.getContext('2d');
-const searchButton = document.querySelector('#generate-button');
-const updateButton = document.querySelector('#update-button');
+// canvas setup
+const ctx = document.querySelector('canvas').getContext('2d');
 
+// event listeners
 searchButton.addEventListener('click', getStock);
 updateButton.addEventListener('click', getStock);
