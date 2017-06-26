@@ -72,7 +72,10 @@ function createChart(variants) {
   });
   // console.log(colors);
 
-  let chart = new Chart(ctx, {
+  if (sizeChart) {
+    sizeChart.destroy();
+  }
+  sizeChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: sizes, // sizes array
@@ -148,6 +151,7 @@ let skuCurrent = '';
 
 // canvas setup
 const ctx = document.querySelector('canvas').getContext('2d');
+let sizeChart = '';
 
 // event listeners
 searchButton.addEventListener('click', getStock);
