@@ -152,3 +152,9 @@ const ctx = document.querySelector('canvas').getContext('2d');
 // event listeners
 searchButton.addEventListener('click', getStock);
 updateButton.addEventListener('click', getStock);
+skuInput.addEventListener('keypress', function(e) {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    searchButton.click();
+  }
+})
