@@ -53,7 +53,7 @@ function createChart(variants) {
     sizes.push(element.attributes.size.replace(/,/g, '.'));
 
     const ats = parseInt(element.ATS);
-    console.log(ats);
+    // console.log(ats);
     switch (true) {
       case (ats <= 1):
         colors.push('#FF6138');
@@ -70,7 +70,7 @@ function createChart(variants) {
     }
     stock.push(ats);
   });
-  console.log(colors);
+  // console.log(colors);
 
   let chart = new Chart(ctx, {
     type: 'bar',
@@ -84,8 +84,6 @@ function createChart(variants) {
     },
     options
   });
-
-  document.body.style.height = '100vh';
 }
 
 
@@ -114,8 +112,11 @@ function getStock() {
 }
 
 function showStock(data) {
-  // show canvas and snapshot       
-  document.querySelectorAll('.hidden').forEach(element => element.classList.remove('hidden'));
+  // show snapshot
+  const hidden = document.querySelector('.hidden');
+  if (hidden) {
+    hidden.classList.remove('hidden');
+  }
   
   // create graph
   const variants = [...data.variations.variants];
@@ -133,7 +134,8 @@ let skuCurrent = '';
 const skuInput = document.querySelector('#sku-input');
 const snapShotTime = document.querySelector('#time');
 const skuDisplay = document.querySelector('#sku-display');
-const ctx = document.querySelector('canvas').getContext('2d');
+const canvas = document.querySelector('canvas')
+const ctx = canvas.getContext('2d');
 const searchButton = document.querySelector('#generate-button');
 const updateButton = document.querySelector('#update-button');
 
